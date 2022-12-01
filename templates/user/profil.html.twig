@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profil{% endblock %}
+
+{% block body %}
+    <section id="userDatas">
+        <label for="">Identifiant</label>
+        <div class="userData">
+            {{ user.email }}
+        </div>
+        <label for="">Rôle</label>
+        <div class="userData">
+            {{ user.roles }}
+        </div>
+        <form action="{{ path('app_user_profil', { 'id': user.id}) }}" method="post">
+            {% if error %}
+                {{ error }}
+            {% endif %}
+            <input type="password" name="pwdOld" placeholder="Mot de passe actuel">
+            <input type="password" name="pwdNew" placeholder="Nouveau mot de passe">
+            <input type="password" name="pwdNewDuplique" placeholder="Retaper votre nouveau mot de passe actuel">
+            <button type="submit">Valider</button>
+        </form>
+    </section>
+{% endblock %}
