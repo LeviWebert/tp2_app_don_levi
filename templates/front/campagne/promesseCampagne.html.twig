@@ -1,6 +1,6 @@
 {% block body %}
 
-    <a href="{{ path('app_promesse_de_don_new') }}"><button type="button" class="btn btn-outline-success">Faire un don</button></a>
+    <a href="{{ path('app_promesse_de_don_campagne_new', {'id':campagne.id}) }}"><button type="button" class="btn btn-outline-success">Faire un don</button></a>
     <h1>Promesse de don de la campagne {{ campagne.name }}</h1>
 
     <table class="table">
@@ -33,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Pas de campagne en cours</td>
             </tr>
         {% endfor %}
         </tbody>

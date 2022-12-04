@@ -8,10 +8,6 @@
         <div class="userData">
             {{ user.email }}
         </div>
-        <label for="">Rôle</label>
-        <div class="userData">
-            {{ user.roles }}
-        </div>
         <form action="{{ path('app_user_profil', { 'id': user.id}) }}" method="post">
             {% if error %}
                 {{ error }}
