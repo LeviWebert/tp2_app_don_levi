@@ -1,0 +1,42 @@
+
+{% block body %}
+    <h1>Les promesses de don</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DonationAmount</th>
+                <th>CreatedAt</th>
+                <th>CloseAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promesse_de_don in promesse_de_dons %}
+            <tr>
+                <td>{{ promesse_de_don.id }}</td>
+                <td>{{ promesse_de_don.email }}</td>
+                <td>{{ promesse_de_don.firstName }}</td>
+                <td>{{ promesse_de_don.lastName }}</td>
+                <td>{{ promesse_de_don.donationAmount }}</td>
+                <td>{{ promesse_de_don.createdAt ? promesse_de_don.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ promesse_de_don.closeAt ? promesse_de_don.closeAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_promesse_de_don_show', {'id': promesse_de_don.id}) }}">show</a>
+                    <a href="{{ path('app_promesse_de_don_edit', {'id': promesse_de_don.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_promesse_de_don_new') }}">Create new</a>
+{% endblock %}

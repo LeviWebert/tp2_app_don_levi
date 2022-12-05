@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PromesseDeDon{% endblock %}
+
+{% block body %}
+    <h1>Modifier sa promesse de don</h1>
+
+    {{ include('front/promesse_de_don/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_campagne_show' , {'id': campagne.id})}}">Retourner à la campagne</a>
+
+    {{ include('front/promesse_de_don/_delete_form.html.twig') }}
+{% endblock %}

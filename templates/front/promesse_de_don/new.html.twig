@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PromesseDeDon{% endblock %}
+
+{% block body %}
+    <h1>Faire un don</h1>
+
+    {{ include('front/promesse_de_don/_form.html.twig') }}
+
+    <a href="{{ path('app_acceuil') }}">Retourner à l'acceuil</a>
+{% endblock %}

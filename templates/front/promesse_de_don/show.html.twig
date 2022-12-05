@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromesseDeDon{% endblock %}
+
+{% block body %}
+    <h1>PromesseDeDon</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ promesse_de_don.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ promesse_de_don.emailDonateur }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ promesse_de_don.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ promesse_de_don.lastName }}</td>
+            </tr>
+            <tr>
+                <th>DonationAmount</th>
+                <td>{{ promesse_de_don.donationAmount }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ promesse_de_don.createdAt ? promesse_de_don.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CloseAt</th>
+                <td>{{ promesse_de_don.closeAt ? promesse_de_don.closeAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('app_campagne_show', {'id': campagne.id})  }}">Retourner à la campagne</a></button>
+
+    <a href="{{ path('app_promesse_de_don_edit', {'id': promesse_de_don.id}) }}">Modifier</a>
+
+    {{ include('front/promesse_de_don/_delete_form.html.twig') }}
+{% endblock %}

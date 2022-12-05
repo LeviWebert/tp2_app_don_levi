@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Application de don{% endblock %}
+
+{% block body %}
+<section>
+    <h2>Application de don</h2>
+    <div>
+        <a href="{{ path('app_acceuil') }}"><input type="button" value="Acceuil">
+    </div>
+    <div>
+        <a href="{{ path('app_login') }}"><input type="button" value="Se connecter"></a>
+    </div>
+</section>
+{% endblock %}

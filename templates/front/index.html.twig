@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AcceuilController!{% endblock %}
+
+{% block body %}
+    <main id="main">
+
+        <a href="{{ path('app_promesse_de_don_new') }}"><button type="button" class="btn btn-outline-primary">Faire une promesse de don</button></a>
+
+        {% include 'front/campagne/index.html.twig' %}
+
+    </main>
+{% endblock %}
