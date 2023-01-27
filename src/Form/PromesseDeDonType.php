@@ -19,11 +19,14 @@ class PromesseDeDonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('emailDonateur')
-            ->add('firstName',EntityType::class, options: [
-                'class'=>User::class
-            ])
-            ->add('lastName')
+//            ->add('emailDonateur')
+//            ->add('firstName',EntityType::class, options: [
+//                'class'=>User::class,
+//                'data'=>function($user){
+//                    return $user->getFisrtName();
+//                }
+//            ])
+//            ->add('lastName')
             ->add('donationAmount',IntegerType::class,[
                 'required'=>true,
                 'label'=>'Le montant de votre don'])
@@ -32,6 +35,12 @@ class PromesseDeDonType extends AbstractType
                 'choice_label'=>function($campagne){
                     return $campagne->getName();
                 },
+                'label_attr'=>[
+                    'class'=>'checkbox-inline'
+                ],
+                'multiple'=>false,
+                'expanded'=>true,
+                'by_reference'=>false
             ])
         ;
     }

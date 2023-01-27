@@ -84,31 +84,32 @@ class CampagneController extends AbstractController
     public function promesse(CampagneRepository $campagneRepository, Campagne $campagne): Response
     {
         return $this->render('front/campagne/promesseCampagne.html.twig', [
-            'promesse_de_dons' => $campagneRepository->find($campagne->getId())->getPromesseDeDons(),
+            'promesse_de_dons' => $campagne->getPromesseDeDons(),
             'campagne' => $campagne
         ]);
     }
     #[Route('/{id}/newPromesse', name: 'app_promesse_de_don_campagne_new', methods: ['GET', 'POST'])]
-    public function newPromesse(Request $request, DonateurRepository $donateurRepository, Campagne $campagne,UserRepository $userRepository): Response
+    public function newPromesse(Request $request, DonateurRepository $donateurRepository, CampagneRepository $campagneRepository): Response
     {
-        $form = $this->createForm(PromesseDeDonType::class);
+        $campagne = $campagneRepository->find($request->get('id'));
+
         $promesseDeDon = new PromesseDeDon();
         $promesseDeDon->setCampagne($campagne);
-        //if($this->getUser()!=null)
-        //{
-        //    $promesseDeDon->setFirstName($userRepository->find($this->getUser()->getUserIdentifier()))->setLastName($userRepository->find($this->getUser()->getUserIdentifier())->getLastName());
-        //}
+        $datetime = new \DateTimeImmutable('now');
+        if ($request->getMethod()==="POST")
+        {
+            $promesseDeDon->setFirstName($this->getUser()->getFirstName())
+                ->setLastName($this->getUser()->getLastName())
+            ->setDonationAmount($request->request->get('donation'))
+            ->setEmailDonateur($this->getUser()->getEmail())
+            ->setHonore(false)
+            ->setCreatedAt($datetime);
+            $donateurRepository->save($promesseDeDon,true);
 
-        $form->handleRequest($request);
-        $form->setData($promesseDeDon);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $donateurRepository->save();
-
-            return $this->redirectToRoute('campagne_promesse', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_campagne_show', ['campagne' => $campagne,'id'=>$campagne->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('front/promesse_de_don/new.html.twig', [
-            'form' => $form,
+        return $this->renderForm('front/campagne/newPromesse.html.twig', [
             'campagne' => $campagne
         ]);
     }

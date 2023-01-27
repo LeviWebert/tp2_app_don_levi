@@ -27,11 +27,15 @@ class PromesseDeDonController extends AbstractController
         $promesseDeDon = new PromesseDeDon();
         $form = $this->createForm(PromesseDeDonType::class, $promesseDeDon);
         $form->handleRequest($request);
+        $userConnected = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $promesseDeDon->setEmailDonateur($userConnected->getEmail())
+                ->setFirstName($userConnected->getFirstName())
+                ->setLastName($userConnected->getLastName());
             $donateurRepository->save($promesseDeDon, true);
 
-            return $this->redirectToRoute('app_promesse_de_don_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_acceuil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/promesse_de_don/new.html.twig', [

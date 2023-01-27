@@ -5,7 +5,9 @@
 {% block body %}
     <h1>Faire un don</h1>
 
-    {{ include('front/promesse_de_don/_form2.html.twig') }}
-
+    <form action="{{ path('app_promesse_de_don_campagne_new',{'id':campagne.id })}}" method="post">
+        <input type="number" name="donation" placeholder="montant de votre don">
+        <button type="submit">Faire un don</button>
+    </form>
     <a href="{{ path('app_campagne_show', {'id': campagne.id}) }}">Retourner à la campagne</a>
 {% endblock %}
